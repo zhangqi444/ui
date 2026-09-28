@@ -1,7 +1,7 @@
 # @zhangqi444/ui
 
 The UI primitives shared by [learning](https://github.com/zhangqi444/learning),
-[volunteer](https://github.com/zhangqi444/volunteer) and
+[giving](https://github.com/zhangqi444/giving) and
 [the-little-me](https://github.com/zhangqi444/the-little-me).
 
 Source only — no build step. The consuming site's Vite and Tailwind already
