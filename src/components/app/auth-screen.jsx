@@ -9,6 +9,10 @@ import { useUi } from "./ui-provider"
  *  path fills, and a sign-in button that draws it in the site's own palette is
  *  a sign-in button that looks like a phishing page. */
 export function GoogleMark({ className, size = 18 }) {
+  /* The width/height attributes are a floor, not a guarantee. Both sites'
+   * buttons carry `[&_svg:not([class*='size-'])]:size-4`, which wins over an
+   * attribute, so a mark handed to a button with no `size-` class in its
+   * className renders at 16px whatever this says. Pass one to mean it. */
   return (
     <svg viewBox="0 0 48 48" width={size} height={size} className={className} aria-hidden="true">
       <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
@@ -24,11 +28,11 @@ export function GoogleMark({ className, size = 18 }) {
  *  is; the wording stays with the site, because the two do not stop at the
  *  same points ("Loading Google Sign-In…" only exists where the script has to
  *  be up before the button can mean anything). */
-export function GoogleButton({ busy, className, children, ...props }) {
+export function GoogleButton({ busy, className, markClassName, children, ...props }) {
   const { Button } = useUi()
   return (
     <Button size="lg" className={cn("w-full gap-3", className)} disabled={busy || props.disabled} {...props}>
-      {busy ? <Loader2 className="animate-spin" /> : <GoogleMark />}
+      {busy ? <Loader2 className="animate-spin" /> : <GoogleMark className={markClassName} />}
       {children}
     </Button>
   )
