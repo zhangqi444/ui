@@ -29,9 +29,30 @@ Both sites run a `check_css.cjs` at the end of `npm run build` that fails if
 the package's classes are missing from the stylesheet. Copy it when a third
 site adopts this; the failure it catches is invisible to everything else.
 
+## Gamification
+
+`levels`, `badges`, `medallion` and `badge-card` are the parts of a reward system that
+do not depend on what is being rewarded.
+
+```js
+import { levelOf } from "@zhangqi444/ui/gamify/levels"
+import { nextBadge, badgeCounts, recentBadges } from "@zhangqi444/ui/gamify/badges"
+import { BadgeCard } from "@zhangqi444/ui/gamify/badge-card"
+```
+
+What each site keeps is the part that is about it: its own `LEVELS` table, because a
+volunteering hour and a practice question are not worth the same, and its own list of
+badges, because an achievement in one is not an achievement in the other. `levelOf` takes
+the table as an argument for that reason, and the badge helpers take the list.
+
+`BadgeCard` and `Medallion` take their icon as a node rather than a name, so neither site
+has to agree with the other about which lucide icon means "streak". `BadgeCard` also takes
+an `earnedLabel` string instead of calling a date formatter — the two sites format dates
+differently, which is the whole of the difference between their two copies.
+
 ## `ui/*` — what is in here, and why only this
 
-Sixteen of these were byte-identical in both sites — untouched shadcn output
+Nineteen of these were byte-identical in both sites — untouched shadcn output
 that nobody had reason to change. That is the evidence for calling them
 generic, rather than a judgement about what *ought* to be shared.
 
@@ -96,11 +117,10 @@ cannot do that is not a template yet; it is a redesign wearing one's clothes.
 
 ## Deliberately not here
 
-`badge`, `card`, `dialog`, `progress`, and `giving`'s `button` and `sidebar`.
-Those differ between the sites today, and the differences are skin rather than
-behaviour, but they have not been reduced to variables yet. The sites keep
-their own copies until they have been — see the button note above for what
-happens when they do not.
+`dialog`, and `giving`'s `button` and `sidebar`. Those differ between the sites
+today, and the differences are skin rather than behaviour, but they have not
+been reduced to variables yet. The sites keep their own copies until they have
+been — see the button note above for what happens when they do not.
 
 `app-sidebar`, the navigation itself, is not here and should not be: 221 lines
 in one site and 108 in the other, because they are different applications.
