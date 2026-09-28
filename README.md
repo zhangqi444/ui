@@ -117,6 +117,46 @@ sign-in, dashboard, the sidebar trigger and the open account menu, at desktop,
 phone and dark — with all 156 of its checks still passing. A template that
 cannot do that is not a template yet; it is a redesign wearing one's clothes.
 
+## Surfaces are variables, not opinions
+
+`card`, `badge` and `progress` are drawn differently by the two sites — one
+wants a solid object (a two-pixel border, a hard offset shadow in the border's
+own colour, pill badges, a sheen down the progress bar), the other wants
+shadcn's soft rectangle. That difference is real and neither is the default, so
+it lives in CSS variables and each site declares its own:
+
+| variable | default | what it is |
+| --- | --- | --- |
+| `--card-radius` | `--radius-xl` | the card's corner |
+| `--card-border` | `1px` | its border width |
+| `--card-shadow` | `0 1px 2px 0 rgb(0 0 0/.05)` | its shadow |
+| `--card-title-weight` / `--card-title-tracking` | `600` / `normal` | its title |
+| `--badge-radius` / `--badge-px` / `--badge-weight` | `--radius-md` / `2` / `500` | pill or rectangle |
+| `--progress-radius` / `--progress-sheen` / `--progress-ease-ms` | `0` / `transparent` / `150ms` | flat bar or filling tube |
+
+**Set them explicitly even when they match the default.** The defaults here are
+one site's, and a later change to them restyles every site that was relying on
+them. That is not hypothetical: this card's shadow default is Tailwind's
+`shadow-xs` while the site it replaced used `shadow-sm`, and the one-notch
+difference showed up as one to three percent of the pixels on every page —
+invisible in review, obvious in a diff.
+
+## The card header fix travels with it
+
+`CardHeader` drops shadcn's `grid-rows-[auto_auto]` and `CardAction` stacks
+under the title until the content column reaches `md`. Without that, the second
+grid track is `max-content`: a header with a wide action gives the action
+whatever it asks for and leaves the title the rest. On a 390px phone that put a
+"Log hours" button in half the card and broke "Ready to log your first hours?"
+across three lines; a reward shelf's description ran down a column six lines
+deep beside a "0 to spend" badge. Both sites had the bug. One had already fixed
+it locally, which is how it got here — and moving the fix into the package
+fixed the other site for free, in the only two places its screenshots changed.
+
+It is keyed on `@container/main`, which `app/app-shell` opens. A consumer
+without that container gets the stacked layout everywhere rather than a broken
+one.
+
 ## Deliberately not here
 
 `dialog`, and `giving`'s `button` and `sidebar`. Those differ between the sites
