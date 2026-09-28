@@ -5,10 +5,14 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "exports": {
     "./ui/*": "./src/components/ui/*.jsx",
+    "./app/*": "./src/components/app/*.jsx",
     "./lib/utils": "./src/lib/utils.js",
+    "./lib/drive-status": "./src/lib/drive-status.js",
     "./hooks/use-mobile": "./src/hooks/use-mobile.js"
   },
   "peerDependencies": {
@@ -30,6 +34,8 @@
     "tailwind-merge": "*"
   },
   "peerDependenciesMeta": {
-    "recharts": { "optional": true }
+    "recharts": {
+      "optional": true
+    }
   }
 }
