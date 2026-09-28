@@ -1,15 +1,21 @@
 {
   "name": "@zhangqi444/ui",
   "version": "0.1.0",
-  "description": "Shared UI primitives for learning, volunteer and the-little-me.",
+  "description": "Shared UI primitives and gamification parts for learning, volunteer and the-little-me.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "exports": {
     "./ui/*": "./src/components/ui/*.jsx",
     "./lib/utils": "./src/lib/utils.js",
-    "./hooks/use-mobile": "./src/hooks/use-mobile.js"
+    "./hooks/use-mobile": "./src/hooks/use-mobile.js",
+    "./gamify/levels": "./src/gamify/levels.js",
+    "./gamify/badges": "./src/gamify/badges.js",
+    "./gamify/medallion": "./src/gamify/medallion.jsx",
+    "./gamify/badge-card": "./src/gamify/badge-card.jsx"
   },
   "peerDependencies": {
     "@radix-ui/react-avatar": "*",
@@ -27,9 +33,12 @@
     "react": ">=18",
     "react-dom": ">=18",
     "recharts": "*",
-    "tailwind-merge": "*"
+    "tailwind-merge": "*",
+    "@radix-ui/react-progress": "*"
   },
   "peerDependenciesMeta": {
-    "recharts": { "optional": true }
+    "recharts": {
+      "optional": true
+    }
   }
 }

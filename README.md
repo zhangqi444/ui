@@ -20,9 +20,30 @@ name will have no CSS generated for them:
 @source "../node_modules/@zhangqi444/ui/src";
 ```
 
+## Gamification
+
+`levels`, `badges`, `medallion` and `badge-card` are the parts of a reward system that
+do not depend on what is being rewarded.
+
+```js
+import { levelOf } from "@zhangqi444/ui/gamify/levels"
+import { nextBadge, badgeCounts, recentBadges } from "@zhangqi444/ui/gamify/badges"
+import { BadgeCard } from "@zhangqi444/ui/gamify/badge-card"
+```
+
+What each site keeps is the part that is about it: its own `LEVELS` table, because a
+volunteering hour and a practice question are not worth the same, and its own list of
+badges, because an achievement in one is not an achievement in the other. `levelOf` takes
+the table as an argument for that reason, and the badge helpers take the list.
+
+`BadgeCard` and `Medallion` take their icon as a node rather than a name, so neither site
+has to agree with the other about which lucide icon means "streak". `BadgeCard` also takes
+an `earnedLabel` string instead of calling a date formatter — the two sites format dates
+differently, which is the whole of the difference between their two copies.
+
 ## What is in here, and why only this
 
-Sixteen of these were byte-identical in `learning` and `volunteer` — untouched
+Nineteen of these were byte-identical in `learning` and `volunteer` — untouched
 shadcn output that nobody had reason to change. That is the evidence for calling
 them generic, rather than a judgement about what *ought* to be shared.
 
