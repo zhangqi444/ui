@@ -10,7 +10,9 @@
   ],
   "exports": {
     "./ui/*": "./src/components/ui/*.jsx",
+    "./app/*": "./src/components/app/*.jsx",
     "./lib/utils": "./src/lib/utils.js",
+    "./lib/drive-status": "./src/lib/drive-status.js",
     "./hooks/use-mobile": "./src/hooks/use-mobile.js",
     "./gamify/levels": "./src/gamify/levels.js",
     "./gamify/badges": "./src/gamify/badges.js",
